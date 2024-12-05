@@ -92,7 +92,7 @@ public class Scrabble {
     // 2. The user gets the Scrabble points of the entered word.
     // 3. The user is prompted to enter another word, or '.' to end the hand. 
 	public static void playHand(String hand) {
-		int score = 0;
+		int totalScore = 0;
 		// Declares the variable in to refer to an object of type In, and initializes it to represent
 		// the stream of characters coming from the keyboard. Used for reading the user's inputs.   
 		In in = new In();
@@ -114,13 +114,15 @@ public class Scrabble {
 				System.out.println("Not in the dictionary. Try again.");
 				continue;
 			}
-			score += wordScore(input);
+			int score = wordScore(input);
+			totalScore += score;
+			System.out.println(input + " earned " + score + " points. Score: " + totalScore + " points");
 			hand = MyString.remove(hand, input);
 		}
 		if (hand.length() == 0) {
-	        System.out.println("Ran out of letters. Total score: " + score + " points");
+	        System.out.println("Ran out of letters. Total score: " + totalScore + " points");
 		} else {
-			System.out.println("End of hand. Total score: " + score + " points");
+			System.out.println("End of hand. Total score: " + totalScore + " points");
 		}
 	}
 
@@ -151,9 +153,9 @@ public class Scrabble {
 	public static void main(String[] args) {
 		//// Uncomment the test you want to run
 		// testBuildingTheDictionary();  
-		testScrabbleScore();    
+		// testScrabbleScore();    
 		// testCreateHands();  
-		// testPlayHands();
+		testPlayHands();
 		// playGame();
 	}
 
@@ -182,6 +184,6 @@ public class Scrabble {
 		init();
 		// playHand("ocostrza");
 		// playHand("arbffip");
-		// playHand("aretiin");
+		playHand("aretiin");
 	}
 }
