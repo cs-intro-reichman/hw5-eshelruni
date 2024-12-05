@@ -1,5 +1,5 @@
 /**
- * A library of string functions.
+ * A library of string functions. 
  */
 public class MyString {
     public static void main(String args[]) {
