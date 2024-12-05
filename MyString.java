@@ -1,5 +1,5 @@
 /**
- * A library of string functions. 
+ * A library of string functions.
  */
 public class MyString {
     public static void main(String args[]) {
@@ -7,7 +7,24 @@ public class MyString {
         System.out.println(countChar(hello, 'h'));
         System.out.println(countChar(hello, 'l'));
         System.out.println(countChar(hello, 'z'));
+        System.out.println(subsetOf("sap", "space"));
+        System.out.println(subsetOf("spa", "space"));
+        System.out.println(subsetOf("pass", "space"));
+        System.out.println(subsetOf("c", "space"));
+        System.out.println(subsetOf("", "anything"));
         System.out.println(spacedString(hello));
+        System.out.println(spacedString("silent"));
+        System.out.println(spacedString("a"));
+        System.out.println(spacedString(""));
+        System.out.println(spacedString("hi"));
+        System.out.println(randomStringOfLetters(3));
+        System.out.println(randomStringOfLetters(5));
+        System.out.println(randomStringOfLetters(10));
+        System.out.println(remove("committee", "meet"));
+        System.out.println(remove("abc", "abc"));
+        System.out.println(remove("abc", "b"));
+        System.out.println(remove("hello", ""));
+        System.out.println(insertRandomly('s', "cat"));
         //// Put your other tests here.
     }
 
@@ -20,8 +37,13 @@ public class MyString {
      * @return the number of times c appears in str
      */
     public static int countChar(String str, char ch) {
-        //// Replace the following statement with your code
-        return 0;
+        int count = 0;
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == ch) {
+                count++;
+            }
+        }
+        return count;
     }
 
     /** Returns true if str1 is a subset string str2, false otherwise
@@ -36,8 +58,20 @@ public class MyString {
      * @return true is str1 is a subset of str2, false otherwise
      */
     public static boolean subsetOf(String str1, String str2) {
-         //// Replace the following statement with your code
-        return false;
+        for (int i = 0; i < str1.length(); i++) {
+            boolean found = false;
+            for (int j = 0; j < str2.length(); j++) {
+                if (str1.charAt(i) == str2.charAt(j)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                return false;
+            }
+            str2 = str2.replace(String.valueOf(str1.charAt(i)), "");
+        }
+        return true;
     }
 
     /** Returns a string which is the same as the given string, with a space
@@ -49,10 +83,16 @@ public class MyString {
      * @return a string consisting of the characters of str, separated by spaces.
      */
     public static String spacedString(String str) {
-        //// Replace the following statement with your code
-        return null;
+        String newStr = "";
+        for (int i = 0; i < str.length(); i++) {
+            newStr += str.charAt(i);
+            if (i != str.length() - 1) {
+                newStr += " ";
+            }
+        }
+        return newStr;
     }
-  
+
     /**
      * Returns a string of n lowercase letters, selected randomly from 
      * the English alphabet 'a', 'b', 'c', ..., 'z'. Note that the same
@@ -64,8 +104,11 @@ public class MyString {
      * @return a randomly generated string, consisting of 'n' lowercase letters
      */
     public static String randomStringOfLetters(int n) {
-        //// Replace the following statement with your code
-        return null;
+        String newStr = "";
+        for (int i = 0; i < n; i++) {
+            newStr += (char) ((int) (Math.random() * ('z' - 'a' + 1)) + 'a');
+        }
+        return newStr;
     }
 
     /**
@@ -78,8 +121,10 @@ public class MyString {
      * @return a string consisting of str1 minus all the characters of str2
      */
     public static String remove(String str1, String str2) {
-       //// Replace the following statement with your code
-        return null;
+        for (int i = 0; i < str2.length(); i++) {
+            str1 = str1.replaceFirst(String.valueOf(str2.charAt(i)), "");
+        }
+        return str1;
     }
 
     /**
@@ -94,7 +139,7 @@ public class MyString {
          // Generate a random index between 0 and str.length()
          int randomIndex = (int) (Math.random() * (str.length() + 1));
          // Insert the character at the random index
-         String result = str.substring(0, randomIndex) + ch + str.substring(randomIndex);
-         return result;
+        String result = str.substring(0, randomIndex) + ch + str.substring(randomIndex);
+        return result;
     }    
 }
